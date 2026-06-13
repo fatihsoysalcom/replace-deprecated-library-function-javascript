@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependency Transition Example</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; line-height: 1.6; color: #333; background-color: #f9f9f9; }
+        .container { display: flex; gap: 20px; flex-wrap: wrap; }
+        .box { border: 1px solid #e0e0e0; background-color: #fff; padding: 20px; border-radius: 8px; flex: 1; min-width: 300px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        h1 { color: #2c3e50; margin-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 0; }
+        p { margin-bottom: 15px; }
+        pre { background-color: #ecf0f1; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; color: #2c3e50; }
+        .deprecated { color: #95a5a6; text-decoration: line-through; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Fable/Mythos Deprecation: Transition Strategy Example</h1>
+    <p>This example demonstrates a simplified approach to replacing a hypothetical utility function from a deprecated library (like Mythos) with a modern, native JavaScript implementation.</p>
+
+    <div class="container">
+        <div class="box">
+            <h2>Legacy (Hypothetical Mythos 5)</h2>
+            <p class="deprecated">Imagine a utility function <code>processDataLegacy</code> that internally relied on a deprecated library like Mythos 5 for array transformations. Its output is shown below.</p>
+            <pre id="legacyOutput"></pre>
+        </div>
+
+        <div class="box">
+            <h2>Modern (Native JavaScript)</h2>
+            <p>A new <code>processDataModern</code> function replaces the deprecated dependency with standard JavaScript array methods, ensuring future compatibility. Its output is shown below.</p>
+            <pre id="modernOutput"></pre>
+        </div>
+    </div>
+
+    <script>
+        const rawData = [
+            { id: 1, name: "Item A", status: "active", value: 100 },
+            { id: 2, name: "Item B", status: "inactive", value: 50 },
+            { id: 3, name: "Item C", status: "active", value: 120 },
+            { id: 4, name: "Item D", status: "pending", value: 80 }
+        ];
+
+        // --- Hypothetical Legacy Implementation (simulating a deprecated dependency) ---
+        // This function simulates behavior that might have relied on a deprecated library (e.g., Mythos 5).
+        // In a real scenario, this function would directly use the external library's API.
+        function processDataLegacy(data) {
+            console.log("--- Using Hypothetical Legacy Function (Mythos 5 dependent) ---");
+            // Illustrates a function that would be removed or refactored due to deprecation.
+            const activeItems = data.filter(item => item.status === "active");
+            const formattedItems = activeItems.map(item => ({
+                id: item.id,
+                label: item.name.toUpperCase(),
+                calculatedValue: item.value * 1.1 // Some specific calculation
+            }));
+            return formattedItems;
+        }
+
+        // --- Modern Implementation (using native JavaScript) ---
+        // This function replaces the dependency on the deprecated library.
+        // It achieves the same result using standard, widely supported JavaScript features.
+        function processDataModern(data) {
+            console.log("--- Using Modern Native JavaScript Function ---");
+            // This part directly replaces the functionality previously provided by the deprecated library.
+            // It demonstrates evaluating alternatives and implementing a new solution.
+            const activeItems = data.filter(item => item.status === "active"); // Replacing a dependency's filtering utility
+            const formattedItems = activeItems.map(item => ({ // Replacing a dependency's mapping utility
+                id: item.id,
+                label: item.name.toUpperCase(),
+                calculatedValue: item.value * 1.1
+            }));
+            return formattedItems;
+        }
+
+        // Display results
+        document.addEventListener('DOMContentLoaded', () => {
+            const legacyResult = processDataLegacy(rawData);
+            document.getElementById('legacyOutput').textContent = JSON.stringify(legacyResult, null, 2);
+
+            const modernResult = processDataModern(rawData);
+            document.getElementById('modernOutput').textContent = JSON.stringify(modernResult, null, 2);
+
+            console.log("Legacy Result:", legacyResult);
+            console.log("Modern Result:", modernResult);
+        });
+    </script>
+</body>
+</html>
